@@ -1,8 +1,6 @@
 package com.wordle;
 
 import com.wordle.repository.WordRepository;
-import com.wordle.service.GameService;
-import com.wordle.ui.GameConsoleUI;
 
 import java.util.List;
 
