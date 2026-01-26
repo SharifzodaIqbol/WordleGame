@@ -56,6 +56,14 @@ public class GameService {
         return ch>='A' && ch<='Z' || ch >='a' && ch<='z';
     }
     public boolean exist(String word){
-        return repository.getWords().contains(word);
+        return repository.getWords().contains(word.toUpperCase());
+    }
+    public boolean isWin(String[] result){
+        for (int i = 0; i < 5; i++){
+            if (!result[i].equals("Correct")){
+                return false;
+            }
+        }
+        return true;
     }
 }
