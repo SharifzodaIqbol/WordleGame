@@ -1,24 +1,30 @@
 package com.wordle.repository;
+
 import java.util.*;
+
 public class WordRepository {
+    private static final String FILE_NAME = "words.txt";
     private final Set<String> words;
-    public WordRepository(){
+
+    public WordRepository() {
         this.words = loadWordsFromFile();
     }
+
     public Set<String> loadWordsFromFile() {
-        Set<String> words = new HashSet<>();
-        try(var is = getClass().getClassLoader().getResourceAsStream("words.txt")) {
-            if(is == null) throw new RuntimeException("Файл words.txt не найден");
+        Set<String> wordsSet = new HashSet<>();
+        try (var is = getClass().getClassLoader().getResourceAsStream(FILE_NAME)) {
+            if (is == null) throw new RuntimeException("Файл " + FILE_NAME + " не найден");
             Scanner scanner = new Scanner(is);
-            while (scanner.hasNextLine()){
-                words.add(scanner.nextLine());
+            while (scanner.hasNextLine()) {
+                wordsSet.add(scanner.nextLine().toUpperCase());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Ошибка загрузки словаря", e);
         }
-        return words;
+        return wordsSet;
     }
-    public Set<String> getWords(){
+
+    public Set<String> getWords() {
         return words;
     }
 }
